@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>navigo demo</title>
+  </head>
+  <script src="//unpkg.com/navigo@6"></script>
+
+  <body>
+    <div id="app"></div>
+
+    <template id="root">
+      <a href="/demo" data-navigo>リンク</a>
+    </template>
+
+    <template id="demo">
+      <a href="/" data-navigo>戻る</a>
+    </template>
+
+    <script type="text/javascript">
+      const app = document.querySelector("#app");
+
+      const root = null;
+      const router = new Navigo(root);
+      router
+        .on(function () {
+          const template = document.querySelector("#root");
+          const clone = template.content.cloneNode(true);
+          app.append(clone);
+        })
+        .on("demo", function () {
+          const template = document.querySelector("#demo");
+          const clone = template.content.cloneNode(true);
+          app.append(clone);
+        })
+        .resolve();
+    </script>
+  </body>
+</html>
